@@ -1,28 +1,9 @@
-# This workflow will build and push a Java application to an Azure Web App when a commit is pushed to your default branch.
-#
-# This workflow assumes you have already created the target Azure App Service web app.
-# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-java?tabs=javase&pivots=platform-linux
-#
-# To configure this workflow:
-#
-# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
-#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
-#
-# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
-#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
-#
-# 3. Change the value for the AZURE_WEBAPP_NAME. Optionally, change the JAVA_VERSION environment variable below.
-#
-# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
-# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
-
 name: Build and deploy JAR app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to the name of your Azure Web App
-  JAVA_VERSION: '11'                  # set this to the Java version to use
-  DISTRIBUTION: zulu                  # set this to the Java distribution
+  AZURE_WEBAPP_NAME: taskmanager-main    # Azure Web App의 이름으로 변경
+  JAVA_VERSION: '11'                  # 사용하는 Java 버전
+  DISTRIBUTION: zulu                  # Java 배포판 설정 (예: zulu, adopt, etc.)
 
 on:
   push:
@@ -44,16 +25,16 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.DISTRIBUTION }}
-          cache: 'maven'
+          cache: 'gradle'  # Gradle 캐시 사용
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build with Gradle
+        run: ./gradlew build -x test  # Gradle 빌드 (테스트 제외)
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/build/libs/*.jar'  # Gradle 빌드 결과물 위치
 
   deploy:
     permissions:
@@ -76,4 +57,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '*.jar'
+          package: '*.jar'  # 다운로드한 JAR 파일을 배포
