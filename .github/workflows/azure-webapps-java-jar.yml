@@ -27,6 +27,9 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
           cache: 'gradle'  # Gradle 캐시 사용
 
+      - name: Grant execute permission for Gradle
+        run: chmod +x ./gradlew  # gradlew 파일에 실행 권한 추가
+
       - name: Build with Gradle
         run: ./gradlew build -x test  # Gradle 빌드 (테스트 제외)
 
