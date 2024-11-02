@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardList</title>
+    <link rel="stylesheet" href="/css/board.css">
+</head>
+<body>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board: ${boardList.content}">
+            <td th:text="${board.id}"></td>
+            <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardTitle}"></a></td>
+            <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${board.boardHits}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination-container" th:if="${boardList.totalPages >= 1}">
+        <a th:href="@{/board(page=1)}">&lt;&lt;</a>
+        <a th:href="${boardList.first} ? '#' : @{/board(page=${boardList.number})}">&lt;</a>
+
+        <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+            <span th:if="${page == boardList.number + 1}" th:text="${page}" class="pagination-current"></span>
+            <span th:unless="${page == boardList.number + 1}">
+                <a th:href="@{/board?page={page}(page=${page})}" th:text="${page}"></a>
+            </span>
+        </span>
+
+        <a th:href="${boardList.last} ? '#' : @{/board(page=${boardList.number + 2})}">&gt;</a>
+        <a th:href="@{/board(page=${boardList.totalPages})}">&gt;&gt;</a>
+    </div>
+
+    <div class="button-container">
+        <button onclick="saveBoard()" class="button">글작성</button>
+        <a href="/" class="button">홈으로</a>
+    </div>
+</div>
+<script src="/js/board.js/"></script>
+</body>
+</html>

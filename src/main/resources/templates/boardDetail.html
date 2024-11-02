@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardDetail</title>
+    <link rel="stylesheet" href="/css/boardDetail.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <table class="detail-table">
+        <tr>
+            <th>제목</th>
+            <td th:text="${board.boardTitle}"></td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td th:text="${board.memberId}"></td>
+        </tr>
+        <tr>
+            <th>날짜</th>
+            <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td th:text="${board.boardHits}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td th:text="${board.boardContents}"></td>
+        </tr>
+        <tr th:if="${board.fileAttached == 1}">
+            <th>사진</th>
+            <td>
+                <img th:src="@{|/upload/${board.storedFileName}|}" alt="" width="400" height="300">
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" id="boardId" th:value="${board.id}"/>
+    <div class="button-group">
+        <button onclick="listBoard()" class="button">목록</button>
+        <button onclick="updateBoard()" class="button" th:if="${board.memberId == loginId}">수정</button>
+        <button onclick="deleteBoard()" class="button delete-button" th:if="${board.memberId == loginId}">삭제</button>
+    </div>
+    <div id="comment-write">
+        <input type="text" id="commentWriter" class="writer-input" placeholder="작성자" th:value="${loginId}" readonly>
+        <input type="text" id="commentContents" class="content-input" placeholder="내용">
+        <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
+    </div>
+    <div id="comment-list">
+        <div th:each="comment: ${commentList}" class="comment-item">
+            <div class="comment-meta">
+                <span th:text="${comment.commentWriter}"></span>
+                <span th:text="*{#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </div>
+            <div class="comment-content" th:text="${comment.commentContents}"></div>
+        </div>
+    </div>
+</div>
+<script src="/js/boardDetail.js"></script>
+</body>
+</html>

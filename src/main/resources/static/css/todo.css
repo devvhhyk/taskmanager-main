@@ -1,0 +1,130 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #3b5998;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #3b5998;
+    outline: none;
+}
+
+.add-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background-color: #3b5998;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #2d4373;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: #f7f8fa;
+    margin-bottom: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #e9ecef;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+li span {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #495057;
+}
+
+.completed span {
+    text-decoration: line-through;
+    color: #adb5bd;
+}
+
+button.edit-btn, button.delete-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: #495057;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+button.edit-btn:hover, button.delete-btn:hover {
+    color: #3b5998;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.home-button {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 24px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #3b5998;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.home-button:hover {
+    background-color: #2d4373;
+    transform: translateY(-2px);
+}

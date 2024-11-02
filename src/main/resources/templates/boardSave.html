@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardSave</title>
+    <link rel="stylesheet" href="/css/boardSave.css">
+</head>
+<body>
+<div class="container">
+    <form id="boardForm" action="/board/save" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+        <label for="boardTitle">제목</label>
+        <input type="text" id="boardTitle" name="boardTitle"> <br>
+        <label for="boardContents">내용</label>
+        <textarea id="boardContents" name="boardContents" cols="30" rows="10"></textarea> <br>
+        <input type="file" name="boardFile"> <br>
+        <div class="button-group">
+            <input type="submit" value="글저장" class="button">
+            <button type="button" onclick="window.location.href='/board'">취소</button>
+        </div>
+    </form>
+</div>
+<script src="/js/boardSave.js"></script>
+</body>
+</html>

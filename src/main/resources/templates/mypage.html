@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Mypage</title>
+    <link rel="stylesheet" href="/css/mypage.css">
+</head>
+<body>
+<div class="container">
+    <h2>My Page</h2>
+    <div class="info">
+        <label>로그인한 ID:</label>
+        <p th:text="${session.loginId}"></p>
+    </div>
+    <div class="actions">
+        <a href="/" class="button home-button">홈으로</a>
+        <a href="/member/logout" class="button logout-button">로그아웃</a>
+    </div>
+</div>
+</body>
+</html>

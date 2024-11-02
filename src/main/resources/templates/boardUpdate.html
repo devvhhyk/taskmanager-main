@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BoardUpdate</title>
+    <link rel="stylesheet" href="/css/boardUpdate.css">
+</head>
+<body>
+<div class="container">
+    <form action="/board/update" method="post" name="updateForm">
+        <input type="hidden" name="id" th:value="${boardUpdate.id}">
+        <label for="boardTitle">제목:</label>
+        <input type="text" id="boardTitle" name="boardTitle" th:value="${boardUpdate.boardTitle}" required>
+        <label for="boardContents">내용:</label>
+        <textarea id="boardContents" name="boardContents" cols="30" rows="10" th:text="${boardUpdate.boardContents}" required></textarea>
+        <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+        <input type="submit" value="글수정" class="button">
+    </form>
+</div>
+</body>
+</html>
