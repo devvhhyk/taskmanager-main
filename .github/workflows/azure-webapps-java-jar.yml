@@ -33,11 +33,14 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test  # Gradle 빌드 (테스트 제외)
 
+      - name: List build directory
+        run: ls -la build/libs  # 빌드 후 JAR 파일 확인을 위한 디버그 단계 추가
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/build/libs/*.jar'  # Gradle 빌드 결과물 위치
+          path: 'build/libs/*.jar'  # Gradle 빌드 결과물 위치
 
   deploy:
     permissions:
@@ -60,4 +63,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: 'build/libs/project-0.0.1-SNAPSHOT.jar'  # 다운로드한 JAR 파일을 배포
+          package: 'java-app/*.jar'  # 다운로드한 JAR 파일을 배포
