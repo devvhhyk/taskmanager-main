@@ -2,7 +2,7 @@ name: Build and deploy JAR app to Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: taskmanager-main    # Azure Web App의 이름으로 변경
-  JAVA_VERSION: '11'                  # 사용하는 Java 버전
+  JAVA_VERSION: '17'                  # Java 버전을 17로 변경
   DISTRIBUTION: zulu                  # Java 배포판 설정 (예: zulu, adopt, etc.)
 
 on:
