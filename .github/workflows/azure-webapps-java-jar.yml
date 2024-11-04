@@ -37,7 +37,7 @@ jobs:
         run: ls -la build/libs  # 빌드 후 JAR 파일 확인을 위한 디버그 단계 추가
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # v3 -> v4로 업데이트
         with:
           name: java-app
           path: 'build/libs/*.jar'  # Gradle 빌드 결과물 위치
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4  # v3 -> v4로 업데이트
         with:
           name: java-app
           path: '.'  # 현재 디렉토리에 다운로드
@@ -67,4 +67,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: 'project-0.0.1-SNAPSHOT.jar'  # 현재 디렉토리의 JAR 파일을 배포
+          package: 'build/libs/project-0.0.1-SNAPSHOT.jar'  # 정확한 JAR 파일 경로
