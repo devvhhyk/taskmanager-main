@@ -20,6 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // 모든 경로에 대해
-                .allowedOrigins("https://taskmanager-main-ekh8bbgpa3dcbvht.koreacentral-01.azurewebsites.net"); // Azure 배포 도메인 허용
+                .allowedOrigins("https://taskmanager-main-ekh8bbgpa3dcbvht.koreacentral-01.azurewebsites.net") // Azure 배포 도메인 허용
+                .allowedMethods("GET", "POST", "PUT", "DELETE"); // 필요한 HTTP 메서드 허용
     }
 }
