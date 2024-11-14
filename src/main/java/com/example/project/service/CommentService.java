@@ -43,4 +43,19 @@ public class CommentService {
         }
         return commentDTOList;
     }
+
+    public CommentDTO findById(Long commentId) {
+        Optional<CommentEntity> optionalCommentEntity = commentRepository.findById(commentId);
+        if (optionalCommentEntity.isPresent()) {
+            CommentEntity commentEntity = optionalCommentEntity.get();
+            return CommentDTO.toCommentDTO(commentEntity, commentEntity.getBoardEntity().getId());
+        } else {
+            return null; // 해당 ID의 댓글이 없을 경우 null 반환
+        }
+    }
+
+    // 댓글 삭제
+    public void delete(Long commentId) {
+        commentRepository.deleteById(commentId);
+    }
 }

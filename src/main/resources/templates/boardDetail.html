@@ -52,6 +52,9 @@
             <div class="comment-meta">
                 <span th:text="${comment.commentWriter}"></span>
                 <span th:text="*{#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                <button class="delete-comment-btn"
+                        th:onclick="'deleteComment(' + ${comment.id} + ')'"
+                        th:if="${comment.commentWriter == loginId}">댓글삭제</button>
             </div>
             <div class="comment-content" th:text="${comment.commentContents}"></div>
         </div>

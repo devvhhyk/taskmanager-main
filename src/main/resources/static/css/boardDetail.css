@@ -171,3 +171,18 @@ body {
 .comment-item .comment-meta span {
     margin-right: 15px;
 }
+
+.delete-comment-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-comment-btn:hover {
+    background-color: #c82333;
+}
